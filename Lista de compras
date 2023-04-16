@@ -1,0 +1,98 @@
+"""
+Faça uma lista de compras com listas.
+O usuário deve ter a possibilidade de inserir, apagar e listar valores da sua lista.
+Não permita que o programa quebre com erros de índices inexistentes na lista.
+"""
+
+import os
+from time import sleep
+
+produtos = []
+
+while True:
+    os.system('cls')
+    print('~' * 15, 'Lista de compras'.upper(), '~' * 15)
+    print()
+    # try:
+    #     for i, p in enumerate(produtos):
+    #             print(f'\033[36m{i}\033[m\t\t\033[35m{p}\033[m')
+    # except:
+    #         print()
+    #         print('\033[31m\t*Não existe itens na sua lista*\033[m')
+    #         print()
+    # print('\tDigite uma opção:')
+    print()
+    escolha = input('\t\tDigite uma opção: \n\n\033[32m[A]dicionar\033[m | \033[31m[E]xcluir\033[m | \033[33m[L]istar\033[m | [S]air: ')
+
+    if len(escolha) > 1:
+        os.system('cls')
+        print()
+        print('\t      Opção invalida...\n\t*\033[31mMAIS DE UMA LETRA DIGITADA\033[m*')
+        sleep(1)
+        os.system('cls')
+        continue
+
+    if len(escolha) < 1:
+        os.system('cls')
+        print()
+        print('\t      Opção invalida...\n\t*\033[31mNENHUMA LETRA DIGITADA\033[m*')
+        sleep(1)
+        os.system('cls')
+        continue
+
+    if escolha in 'Aa':
+        os.system('cls')
+        print()
+        print('Adicionar items... (ex: Macarrão, Feijão, Arroz, etc...)')
+        print()
+        item = input('Qual item deseja adicionar? ').capitalize()
+        if item in produtos:
+            print('\033[31m\t*Item já registrado!*\033[m')
+            sleep(1)
+            continue
+        produtos.append(item)
+        print()
+        print(f'Item: "\033[34m{item.capitalize()}\033[m" foi adicionado com sucesso.')
+        sleep(1)
+        os.system('cls')
+        sleep(.1)
+        # continuar = input('Deseja adicionar mais items?\n[S]im [N]ão: ')
+        # if continuar in 'Ss':
+        #      pass
+        # elif continuar in 'Nn':
+        #      continue
+
+    if escolha in 'Ee':
+        os.system('cls')
+        # for indice, produto in produtos:
+        #     print(indice, produto)
+        for i, p in enumerate(produtos):
+            print(f'\033[36m{i}\033[m\t\t\033[35m{p}\033[m')
+        print()
+
+        item_excluir = int(input('Qual item deseja excluir: '))
+        try:
+            del produtos[item_excluir]
+        except:
+            print()
+            print('\033[31m\t*Não existe itens na sua lista*\033[m')
+        print()
+        sleep(.5)
+
+    if escolha in 'Ll':
+        os.system('cls')
+        if len(produtos) >= 1:
+            print('\tLista atualizada')
+            for i, p in enumerate(produtos):
+                print(f'\033[36m{i}\033[m\t\t\033[35m{p}\033[m')
+            sleep(2)
+        else:
+            print('\033[31m\n\t*Não existe itens na sua lista*\033[m')
+            sleep(1)
+        print()
+
+    if escolha in 'Ss':
+        print()
+        print('\t\t\033[31mEncerrando a lista...\033[m')
+        print()
+        break
